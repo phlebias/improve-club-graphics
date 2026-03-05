@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location and Facilities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- GLOBAL BRIDGEWEBS FIXES --- */
+        /* Fixes the text contrast on the top-left 'Results' boxes */
+        .page_title_4,
+        .page_title_4 a,
+        .page_title_4.newslink {
+            color: #ffffff !important;
+        }
+
+        /* ------------------------------- */
+
+        .lbc-facilities-container {
+            /* Scoped variables strictly for this widget */
+            --primary-color: #f8fafc;
+            /* White text for main headings in dark theme */
+            --accent-color: #60a5fa;
+            /* Bright blue for accents and buttons */
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            /* Deep slate/navy dark background */
+            --bg-body: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            /* Elegant dark card background */
+            --bg-card: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+
+            font-family: 'Inter', sans-serif, system-ui;
+            color: var(--text-main);
+            max-width: 900px;
+            width: 100%;
+            margin: 2rem auto;
+            /* added spacing similar to what body provided */
+            line-height: 1.6;
+            box-sizing: border-box;
+        }
+
+        .lbc-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Decorative top gradient line */
+        .lbc-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+        }
+
+        .lbc-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .lbc-header h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.025em;
+        }
+
+        .lbc-header p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .lbc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .lbc-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            padding: 1.5rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .lbc-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .lbc-icon-wrapper {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: rgba(96, 165, 250, 0.15);
+            color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lbc-icon-wrapper svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2;
+        }
+
+        .lbc-item-content h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .lbc-item-content p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .lbc-btn-map-wrapper {
+            text-decoration: none !important;
+            display: inline-block;
+            margin-top: 0.75rem;
+        }
+
+        .lbc-btn-map {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.25rem;
+            background-color: #3b82f6 !important;
+            color: #ffffff !important;
+            font-size: 0.875rem;
+            font-weight: 700 !important;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            border: 1px solid #2563eb !important;
+            cursor: pointer;
+        }
+
+        .lbc-btn-map-wrapper:hover .lbc-btn-map,
+        .lbc-btn-map-wrapper:active .lbc-btn-map {
+            background-color: #2563eb !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.5);
+        }
+
+        .lbc-btn-map svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .lbc-card {
+                padding: 2rem;
+            }
+
+            .lbc-header h2 {
+                font-size: 1.875rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="lbc-facilities-container">
+        <div class="lbc-card">
+            <div class="lbc-header">
+                <h2>Location and Facilities</h2>
+                <p>Welcome to Liverpool Bridge Club. Explore our excellent location, modern amenities, and comfortable
+                    playing environment.</p>
+            </div>
+
+            <div class="lbc-grid">
+
+                <!-- Address & Map -->
+                <div class="lbc-item">
+                    <div class="lbc-icon-wrapper">
+                        <!-- Map Pin Icon -->
+                        <svg xmlns="http://www.w3.org/Form/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <div class="lbc-item-content">
+                        <h3>Find Us</h3>
+                        <p>Mersey House, MATCHWORKS site<br>Speke Road, Liverpool L19 2PH</p>
+                        <a href="https://maps.google.com/?q=Liverpool+Bridge+Club+Mersey+House+Speke+Road+Liverpool"
+                            target="_blank" class="lbc-btn-map-wrapper" style="text-decoration: none !important;">
+                            <div class="lbc-btn-map" style="background-color: #3b82f6 !important;">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    style="color: #ffffff !important; stroke: #ffffff !important;">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                                <span style="color: #ffffff !important; font-weight: 700 !important;">View on Google
+                                    Maps</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Transport & Parking -->
+                <div class="lbc-item">
+                    <div class="lbc-icon-wrapper">
+                        <!-- Car Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                            <!-- Note: Using abstract direction or parking icon conceptually -->
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3 10h18M5 10l1-5h12l1 5m-14 0v9a1 1 0 001 1h2a1 1 0 001-1v-2h6v2a1 1 0 001 1h2a1 1 0 001-1v-9m-14 0h14" />
+                        </svg>
+                    </div>
+                    <div class="lbc-item-content">
+                        <h3>Transport & Parking</h3>
+                        <p>Excellent public transport links and ample, secure car parking available on-site for all
+                            members and visitors.</p>
+                    </div>
+                </div>
+
+                <!-- Playing Room -->
+                <div class="lbc-item">
+                    <div class="lbc-icon-wrapper">
+                        <!-- Cards / Table Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                    </div>
+                    <div class="lbc-item-content">
+                        <h3>Spacious Playing Room</h3>
+                        <p>Enjoy a large, light, and airy playing room accommodating up to 12 tables in a comfortable
+                            setting.</p>
+                    </div>
+                </div>
+
+                <!-- Amenities & Accessibility -->
+                <div class="lbc-item">
+                    <div class="lbc-icon-wrapper">
+                        <!-- Coffee Cup / Heart -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="lbc-item-content">
+                        <h3>Amenities & Access</h3>
+                        <p>Fully equipped with coffee and tea making facilities. The club is fully accessible with
+                            disabled access throughout.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
